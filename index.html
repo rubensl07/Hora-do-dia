@@ -13,13 +13,13 @@
         }
         @font-face {
             font-family: 'Poppins';
-            src: url('./src/Poppins-Regular.ttf');
+            src: url('./Poppins-Regular.ttf');
         }
 
         :root {
             --bg-color: #ffffff;
             --card-color: #ffffff;
-
+            --period: white;
         }
 
         body {
@@ -32,7 +32,7 @@
             color: white;
         }
 
-        .card {
+        section {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -42,9 +42,10 @@
             width: 50%;
             padding: 2% 0;
             margin: 1rem;
+            box-shadow: 3px 3px 10px var(--period);
         }
 
-        .card #imagem {
+        section #imagem {
             height: 10rem;
             aspect-ratio: 1;
             border-radius: 100%;
@@ -61,13 +62,18 @@
 </head>
 
 <body>
-    <h1>Hora do dia</h1>
-    <div class="card">
+    <header>
+        <h1>Hora do dia</h1>
+    </header>
+    <section>
         <p id="horarioAtual"></p>
         <img id="imagem">
         <p id="mensagem"></p>
-    </div>
-    <p class="nome">Rubens Lobo</p>
+    </section>
+    <footer>
+        <p class="nome">&copy; Rubens Lobo</p>
+
+    </footer>
     <script>
         var root = document.querySelector(':root');
         const dataAtual = new Date()
@@ -75,7 +81,6 @@
         const horarioElement = document.querySelector("#horarioAtual")
         const imagemElement = document.querySelector("#imagem")
         const mensagemElement = document.querySelector("#mensagem")
-
         let periodo
         if (horaAtual >= 6) {
             periodo = "manhã"
@@ -93,25 +98,29 @@
             case "manhã":
                 root.style.setProperty('--bg-color', '#dddf6d');
                 root.style.setProperty('--card-color', '#9cc700cb');
-                imagemElement.src = './src/morning.jpg'
+                root.style.setProperty('--period', 'black');
+                imagemElement.src = './morning.jpg'
                 mensagemElement.textContent = 'Bom dia!'
                 break;
             case "tarde":
                 root.style.setProperty('--bg-color', '#e09462');
                 root.style.setProperty('--card-color', '#e47022cb');
-                imagemElement.src = './src/afternoon.jpg'
+                root.style.setProperty('--period', 'black');
+                imagemElement.src = './afternoon.jpg'
                 mensagemElement.textContent = 'Boa tarde!'
                 break;
             case "noite":
                 root.style.setProperty('--bg-color', '#10094d');
                 root.style.setProperty('--card-color', '#1602d1cb');
-                imagemElement.src = './src/night.webp'
+                root.style.setProperty('--period', 'white');
+                imagemElement.src = './night.webp'
                 mensagemElement.textContent = 'Boa noite!'
                 break;
             case "madrugada":
                 root.style.setProperty('--bg-color', '#000000');
                 root.style.setProperty('--card-color', '#a8a8a8cb');
-                imagemElement.src = './src/dawn.jpg'
+                root.style.setProperty('--period', 'white');
+                imagemElement.src = './dawn.jpg'
                 mensagemElement.textContent = 'Boa madrugada!'
                 break;
         }
