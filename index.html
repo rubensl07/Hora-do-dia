@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hora do dia</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        @font-face {
+            font-family: 'Poppins';
+            src: url('./src/Poppins-Regular.ttf');
+        }
+
+        :root {
+            --bg-color: #ffffff;
+            --card-color: #ffffff;
+
+        }
+
+        body {
+            background-color: var(--bg-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: white;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: var(--card-color);
+            border-radius: 1rem;
+            color: black;
+            width: 50%;
+            padding: 2% 0;
+            margin: 1rem;
+        }
+
+        .card #imagem {
+            height: 10rem;
+            aspect-ratio: 1;
+            border-radius: 100%;
+            margin: inherit;
+        }
+
+        h1, .nome{
+            font-family: Poppins;
+        }
+        p {
+            font-family: Arial;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Hora do dia</h1>
+    <div class="card">
+        <p id="horarioAtual"></p>
+        <img id="imagem">
+        <p id="mensagem"></p>
+    </div>
+    <p class="nome">Rubens Lobo</p>
+    <script>
+        var root = document.querySelector(':root');
+        const dataAtual = new Date()
+        let horaAtual = dataAtual.getHours()
+        const horarioElement = document.querySelector("#horarioAtual")
+        const imagemElement = document.querySelector("#imagem")
+        const mensagemElement = document.querySelector("#mensagem")
+
+        let periodo
+        if (horaAtual >= 6) {
+            periodo = "manhã"
+        }
+        if (horaAtual > 12) {
+            periodo = "tarde"
+        }
+        if (horaAtual > 18) {
+            periodo = "noite"
+        }
+        if (horaAtual >= 0 && horaAtual < 6) {
+            periodo = "madrugada"
+        }
+        switch (periodo) {
+            case "manhã":
+                root.style.setProperty('--bg-color', '#dddf6d');
+                root.style.setProperty('--card-color', '#9cc700cb');
+                imagemElement.src = './src/morning.jpg'
+                mensagemElement.textContent = 'Bom dia!'
+                break;
+            case "tarde":
+                root.style.setProperty('--bg-color', '#e09462');
+                root.style.setProperty('--card-color', '#e47022cb');
+                imagemElement.src = './src/afternoon.jpg'
+                mensagemElement.textContent = 'Boa tarde!'
+                break;
+            case "noite":
+                root.style.setProperty('--bg-color', '#10094d');
+                root.style.setProperty('--card-color', '#1602d1cb');
+                imagemElement.src = './src/night.webp'
+                mensagemElement.textContent = 'Boa noite!'
+                break;
+            case "madrugada":
+                root.style.setProperty('--bg-color', '#000000');
+                root.style.setProperty('--card-color', '#a8a8a8cb');
+                imagemElement.src = './src/dawn.jpg'
+                mensagemElement.textContent = 'Boa madrugada!'
+                break;
+        }
+        if (horaAtual == 0) {
+            horarioElement.textContent = `Agora é meia-noite`
+        } else
+            if (horaAtual == 1) {
+                horarioElement.textContent = `Agora é 1 hora`
+            } else {
+                horarioElement.textContent = `Agora são ${horaAtual} horas`
+            }
+
+    </script>
+</body>
+
+</html>
